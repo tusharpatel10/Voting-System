@@ -1,0 +1,15 @@
+.header {
+  background-color: blueviolet;
+  color: white;
+  height: 9vh;
+  text-align: center;
+  padding-top: 1%;
+}
+
+.voter-login-form {
+  background-color: whitesmoke;
+  padding: 1%;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 2px gray;
+  
+}
