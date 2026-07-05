@@ -38,7 +38,7 @@
                     </div>
                     <div class="container mt-4">
                         <button class="btn btn-primary" type="submit" name="login">Login</button>
-                        <span class="mt-3">Haven't Registered yet? </span><a href="register.php">Register Here</a>
+                        <span class="mt-3">Haven't Registered yet? </span><a class="link" href="register.php">Register Here</a>
                     </div>
                 </form>
             </div>
