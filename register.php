@@ -2,13 +2,12 @@
 if (isset($_POST['register'])) {
 
     // DB connectivity
-    $conn = mysqli_connect("localhost:3308", "root", "");
-    $db = mysqli_select_db($conn, "voting");
+    include_once('includes/db_connection.php');
 
     // GET Form Data
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $mobile = $_POST['mobile'];
     $image = $_FILES['photo']['name'];
     $address = $_POST['address'];
