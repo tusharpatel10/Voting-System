@@ -1,3 +1,44 @@
+<?php
+if (isset($_POST['register'])) {
+
+    // DB connectivity
+    $conn = mysqli_connect("localhost:3308", "root", "");
+    $db = mysqli_select_db($conn, "voting");
+
+    // GET Form Data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $mobile = $_POST['mobile'];
+    $image = $_FILES['photo']['name'];
+    $address = $_POST['address'];
+
+    // Move voter image to folder
+    $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+    $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+    if (!in_array($ext, $allowed)) die("invalid file type");
+    $image = uniqid($name, true) . '.' . $ext;
+    $img_path = "voters/images/" . $image;
+    move_uploaded_file($_FILES['photo']['tmp_name'], $img_path);
+
+
+    // Prepare and execute query
+    $query = "INSERT INTO voters values(null,'$name', '$email', '$password', $mobile, '$image', '$address','No')";
+    $result = $conn->query($query);
+    if ($result) {
+        echo "<script>
+        alert('Voter Registered successfully..');
+        </script>";
+        header('location:login.php');
+    } else {
+        echo "<script>
+            alert('Error, Please try again.');
+            </script>";
+        header('location:register.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +67,7 @@
                 <center>
                     <h4><u>Voter Registration Form</u></h4>
                 </center>
-                <form action="" method="post" onsubmit="return validateForm()">
+                <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
@@ -39,7 +80,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="text" class="form-control" id="password" name="password" placeholder="Your Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password">
                         <span id="passError" class="form-text"></span>
                     </div>
                     <div class="form-group">
