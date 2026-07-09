@@ -1,0 +1,17 @@
+.header {
+  background-color: blueviolet;
+  color: white;
+  height: 9vh;
+  text-align: center;
+  padding-top: 1%;
+}
+
+#left-side {
+  margin-left: 3%;
+  margin-top: 3%;
+  border-right: 2px solid black;
+}
+
+.left-side-button {
+  margin-left: 25%;
+}
