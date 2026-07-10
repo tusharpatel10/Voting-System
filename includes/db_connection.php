@@ -1,4 +1,6 @@
 <?php
 // DB connectivity
-$conn = mysqli_connect("localhost:3308", "root", "");
-$db = mysqli_select_db($conn, "voting");
+$conn = new mysqli("localhost:3308", "root", "", "voting");
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
