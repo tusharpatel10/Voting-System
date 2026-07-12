@@ -22,7 +22,7 @@ if (isset($_POST['register'])) {
 
 
     // Prepare and execute query
-    $query = "INSERT INTO voters values(null,'$name', '$email', '$password', $mobile, '$image', '$address','No')";
+    $query = "INSERT INTO voters values(null,'$name', '$email', '$password', $mobile, '$image', '$address','No',1)";
     $result = $conn->query($query);
     if ($result) {
         echo "<script>
