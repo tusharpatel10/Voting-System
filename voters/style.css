@@ -15,3 +15,12 @@
 .left-side-button {
   margin-left: 25%;
 }
+
+#right-side {
+  margin-top: 3%;
+
+}
+
+#right-side, h3 {
+  text-align: center;
+}
