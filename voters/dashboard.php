@@ -69,7 +69,7 @@ include('../includes/db_connection.php');
                             </tbody>
                         </table>
                         <div class="left-side-button">
-                            <a href="" class="btn btn-primary btn-sm">Edit Profile</a>
+                            <a href="edit_profile.php" class="btn btn-primary btn-sm">Edit Profile</a>
                             <a href="../logout.php" class="btn btn-danger btn-sm">Logout</a>
                         </div>
                     <?php
@@ -103,7 +103,7 @@ include('../includes/db_connection.php');
                                     <td><img src="../admin/images/<?php echo $group['image']; ?>" alt="group Image" width="60" srcset=""></td>
                                     <td class="pt-4"><?php echo $group['name'] ?></td>
                                     <?php if ($voting_flag == 'Yes') { ?>
-                                        <td class="pt-4"><a href="vote.php?gid=<?php echo $group['gid'] ?>&tv=<?php echo $group['total_vote'] ?>" class="btn btn-primary btn-sm btn-danger" style="pointer-events:none;">Voted</a></td>
+                                        <td class="pt-4"><a href="" class="btn btn-primary btn-sm btn-danger" style="pointer-events:none;">Voted</a></td>
                                     <?php } else { ?>
                                         <td class="pt-4"><a href="vote.php?gid=<?php echo $group['gid'] ?>&tv=<?php echo $group['total_vote'] ?>" class="btn btn-primary btn-sm">Vote</a></td>
                                     <?php } ?>
