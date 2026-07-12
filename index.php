@@ -20,7 +20,7 @@
     <div class="row mt-4">
         <div class="col-md-4 m-auto">
             <a href="login.php" class="btn btn-primary">Voter Login</a>
-            <a href="" class="btn btn-danger">Admin Login</a>
+            <a href="admin/login.php" class="btn btn-danger">Admin Login</a>
         </div>
     </div>
 </body>

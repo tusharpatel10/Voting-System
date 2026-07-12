@@ -18,9 +18,15 @@
 
 #right-side {
   margin-top: 3%;
-
 }
 
 #right-side, h3 {
   text-align: center;
+}
+
+#edit-profile {
+  background-color: whitesmoke;
+  box-shadow: 2px 5px 12px 2px gray;
+  border-radius: 2%;
+  padding: 15px;
 }
