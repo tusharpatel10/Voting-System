@@ -1,7 +1,30 @@
 <?php
+$update = false;
 session_start();
-// DB connectivity
-include_once('../includes/db_connection.php');
+include("../includes/db_connection.php");
+$vid = $_GET['id'];
+if (isset($_POST['update'])) {
+    // Get From Data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $address = $_POST['address'];
+
+    $query = "UPDATE voters set name='$name', email='$email',mobile=$mobile,address='$address' where id = $vid";
+    $result = $conn->query($query);
+
+    if ($result) {
+        echo "<script type='text/javascript'>
+        alert('Voter updated successfully..');
+        window.location.href = 'dashboard.php';</script>";
+        $update = true;
+    } else {
+        echo "Something went wrong.";
+    }
+}
+$query = "SELECT * FROM voters where id = $_GET[id]";
+$result = $conn->query($query);
+$voter = $result->fetch_assoc();
 
 ?>
 
@@ -11,56 +34,74 @@ include_once('../includes/db_connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voting System</title>
-
+    <title>Document</title>
     <!-- External CSS -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../voters/style.css">
     <!-- bootstrap file -->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script src="../bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <!-- Registration Part -->
-    <div class="container-fluid mt-3">
+    <!-- Alert Message Functionalities -->
+    <?php
+    if ($result) {
+        echo "<div id='autoCloseAlert' class='alert alert-success alert-dismissible fade show' role='alert'>
+            <strong>Update!</strong> Profile Updated Successfully.!
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>";
+    }
+    ?>
+    <script>
+        // Wait for the DOM to completely load
+        document.addEventListener("DOMContentLoaded", function() {
+            const alertElement = document.getElementById("autoCloseAlert");
+            if (alertElement) {
+                // Set a timer for 3000 milliseconds (3 seconds)
+                setTimeout(function() {
+                    // Fetch or initialize the Bootstrap Alert instance
+                    const bsAlert = bootstrap.Alert.getOrCreateInstance(alertElement);
+                    // Programmatically close the alert and remove it from the DOM
+                    bsAlert.close();
+                }, 3000);
+            }
+        });
+    </script>
+
+
+
+    <div class="container">
         <div class="row">
-            <div class="col-md-4 m-auto voter-login-form">
+            <div class="col-md-4 mt-4 m-auto" id="edit-profile">
                 <center>
-                    <h4><u>Group Registration Form</u></h4>
+                    <h4><u>Edit Voter Profile</u></h4>
                 </center>
-                <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <form action="" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $voter['name']; ?>">
                         <span id="nameError" class="form-text"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $voter['email'] ?>">
                         <span id="emailError" class="form-text"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password">
-                        <span id="passError" class="form-text"></span>
-                    </div>
+
                     <div class="form-group">
                         <label for="mobile">Mobile:</label>
-                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile">
+                        <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $voter['mobile'] ?>">
                         <span id="mobileError" class="form-text"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="photo">Upload Photo:</label>
-                        <input type="file" class="form-control" name="photo" id="photo" placeholder="Enter Photo">
-                        <span id="photoError" class="form-text"></span>
-                    </div>
+
                     <div class="form-group">
                         <label for="name">Address:</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" cols="46"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" cols="46"><?php echo $voter['address'] ?></textarea>
                         <span id="addressError" class="form-text"></span>
                     </div>
                     <div class="container mt-4">
-                        <button class="btn btn-primary" type="submit" name="register_group">Register</button>
+                        <button class="btn btn-primary mt-2" type="submit" name="update">Update</button>
+                        <a href="dashboard.php" class="btn btn-success mt-2 ms-3">Go to Dashboard</a>
                     </div>
                 </form>
             </div>

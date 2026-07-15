@@ -11,9 +11,23 @@
   padding: 1%;
   border-radius: 15px;
   box-shadow: 2px 2px 2px 2px gray;
-  
 }
 
-.link{
+.link {
   text-decoration: none;
+}
+
+#left-side {
+  background-color: whitesmoke;
+  box-shadow: 2px 2px 2px 2px gray;
+  min-height: 600px;
+  padding-left: 35px;
+  padding-top: 25px;
+  margin-top: 45px;
+}
+
+#right-side {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  min-height: 600px;
 }
